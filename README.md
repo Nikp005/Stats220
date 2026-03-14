@@ -1,11 +1,15 @@
 # Stats220
 
-This is my repo for STATS 220. 
+### This is my repo for STATS 220. 
 
-A little about me:
+#### A little about me:
 
-- I am undertaking a degree in Statistics and Computer Science 
-- I am taking STATS 220 because Lars kept advocating for it! 😄
-- I am interested in learning about how we experience the modern world and to build thoughtful, intentional things that help us move through it with more clarity, resilience, and meaning.
+* I am undertaking a degree in Statistics and Computer Science 
+* I am taking STATS 220:
+     1. Lars, kept advocating for it! 😄
+     2. The stats deparment is amazing, they're **so organised**, its *weird* 👀!
+     3. Stats staff always seem so happy and have a great sense of humour! Again, weird! 😄 
+* I am interested in learning about how we experience the modern world and to build thoughtful, intentional things that help us move through it with more clarity, resilience, and meaning.
+* [My_cultural_borometer](https://www.businessoffashion.com/) and [Economics_News](https://www.nbr.co.nz)
 
-A meme that captures how I currently feel about my university studies is ![](https://c.tenor.com/8druEACXtX8AAAAd/tenor.gif)
+A meme that captures how I currently feel about my university studies is ![](https://64.media.tumblr.com/551424834d82e9f01f7a2e80b2c82ca9/tumblr_pm0jmgIce31r47iwuo1_500.jpg)
