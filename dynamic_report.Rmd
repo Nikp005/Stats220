@@ -17,15 +17,21 @@ body {
   padding: 10px;
   border-left: 4px solid #a0856c;
 }
+.chart-row {
+  display: flex;
+  flex-direction: row;
+}
 ```
 
 ```{r}
+library(tidyverse) #Don't forget to import this
+
 url <- "https://docs.google.com/spreadsheets/d/e/2PACX-1vSPwf49VCpkPadqvTrJZYm3_SSPqSBwpEXIZHQjh_C_0I5nlQUX9owHrj-YodynivkpCx4OU3EkCUHc/pub?gid=1721477544&single=true&output=csv"
 
 logged_data <- read_csv(url)
 
 # renaming variables & tidying up datable
-latest_data <- rename(logged_data) %>%
+latest_data <- logged_data %>%
   rename(
     location = 2,
     time_of_day = 3,
@@ -33,7 +39,7 @@ latest_data <- rename(logged_data) %>%
     colour_palette = 5,
     num_pieces = 6
   ) %>%
-  select(-"Column 6")   # deleting random empty column 7
+  select(-7)   # deleting random empty column 7
 
 num_obs <- nrow(latest_data)
 
@@ -61,6 +67,8 @@ Across `r num_obs` observations, the most commonly logged aesthetic was **`r mos
 
 :::
 
+::: chart-row
+
 ```{r}
 latest_data %>%
   ggplot() +
@@ -71,16 +79,16 @@ latest_data %>%
         caption = "Source: Street Style Observation Log, 2026"
   )
 ```
-
 ```{r}
 latest_data %>%
   ggplot() +
   geom_bar (aes(y = colour_palette, fill = location)) +
   labs( title = "Colour palette by location",
         x = "Count",
-        y = "colour_palette",
+        y = "colour palette",
         caption = "Source: Street Style Observation Log, 2026"
   )
 ```
 
+:::
 
