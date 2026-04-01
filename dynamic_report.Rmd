@@ -1,0 +1,87 @@
+---
+title: My dynamic report
+output: html_fragment
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
+suppressPackageStartupMessages(library(tidyverse))
+```
+
+```{css}
+body {
+  font-family: Georgia, serif;
+  color: #2c2c2c;
+}
+.dynamic-comment {
+  background-color: #f5f0eb;
+  padding: 10px;
+  border-left: 4px solid #a0856c;
+}
+```
+
+```{r}
+url <- "https://docs.google.com/spreadsheets/d/e/2PACX-1vSPwf49VCpkPadqvTrJZYm3_SSPqSBwpEXIZHQjh_C_0I5nlQUX9owHrj-YodynivkpCx4OU3EkCUHc/pub?gid=1721477544&single=true&output=csv"
+
+logged_data <- read_csv(url)
+
+# renaming variables & tidying up datable
+latest_data <- rename(logged_data) %>%
+  rename(
+    location = 2,
+    time_of_day = 3,
+    aesthetic = 4,
+    colour_palette = 5,
+    num_pieces = 6
+  ) %>%
+  select(-"Column 6")   # deleting random empty column 7
+
+num_obs <- nrow(latest_data)
+
+avg_pieces <- latest_data$num_pieces %>%
+  mean(na.rm = TRUE) %>%
+  round(1)
+
+most_common_aesthetic <- latest_data %>%
+  count(aesthetic) %>%
+  slice_max(n, n = 1) %>%
+  pull(aesthetic)
+
+most_common_colour <- latest_data %>%
+  count(colour_palette) %>%
+  slice_max(n, n = 1) %>%
+  pull(colour_palette)
+
+```
+
+## Street Style in Auckland 
+
+::: dynamic-comment
+
+Across `r num_obs` observations, the most commonly logged aesthetic was **`r most_common_aesthetic`**. The average outfit contained `r avg_pieces` distinct pieces.
+
+:::
+
+```{r}
+latest_data %>%
+  ggplot() +
+  geom_bar (aes(y = aesthetic)) +
+  labs( title = "Aesthetic Distribution Observed in Auckland",
+        x = "Number of observations",
+        y = "Aesthetic category",
+        caption = "Source: Street Style Observation Log, 2026"
+  )
+```
+
+```{r}
+latest_data %>%
+  ggplot() +
+  geom_bar (aes(y = colour_palette, fill = location)) +
+  labs( title = "Colour palette by location",
+        x = "Count",
+        y = "colour_palette",
+        caption = "Source: Street Style Observation Log, 2026"
+  )
+```
+
+
